@@ -3,7 +3,7 @@ import FirebaseAuth
 
 //Manejar todos los datos de los pokemons
 class PokemonViewModel: ObservableObject {
-    @Published var pokemonCollection: [Pokemon] = []
+    @Published var pokemonCollection: [PokemonModel] = []
     @Published var countPokedex: Int = 0
     
     init() {

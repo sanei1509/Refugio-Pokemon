@@ -1,14 +1,16 @@
 import SwiftUI
 
 struct MainTabView: View {
+    @StateObject var favoritesManager = FavoritesManager()
+
     
     var body: some View {
         TabView {
             NavigationView {
-                Home()
+                UserPostsView() // Cambiado a UserPostsView
             }
             .tabItem {
-                Label("Inicio", systemImage: "house")
+                Label("Inicio", systemImage: "house") // Cambia el icono si es necesario
             }
                         
             NavigationView {
@@ -19,11 +21,19 @@ struct MainTabView: View {
             }
             
             NavigationView {
-                SavedList()
+                Home()
             }
             .tabItem {
-                Label("Guardados", systemImage: "bookmark")
-            }
+                Label("Pokedex", systemImage: "list.bullet")
+            }.environmentObject(favoritesManager)
+            
+            
+            NavigationView {
+                FavoritesView()
+            }.tabItem {
+                Label("Favoritos", systemImage: "heart")
+            }.environmentObject(favoritesManager)
+
             
             NavigationView {
                 Account()
@@ -31,6 +41,7 @@ struct MainTabView: View {
             .tabItem {
                 Label("Cuenta", systemImage: "person")
             }
+            
 
         }
     }
